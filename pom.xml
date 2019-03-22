@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.globalegrow.datatransfer</groupId>
+    <artifactId>data-transfer-all</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Data Transfer</name>
+    <packaging>pom</packaging>
+    <description>Data Transfer Service</description>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <file.encoding>UTF-8</file.encoding>
+        <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
+        <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
+        <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
+
+        <netty.version>4.1.32.Final</netty.version>
+        <kafka.version>2.1.0</kafka.version>
+        <junit.version>4.12</junit.version>
+        <logback.version>1.2.3</logback.version>
+        <lombok.version>1.18.4</lombok.version>
+        <mockito.verison>2.23.4</mockito.verison>
+        <apache.common.lang3.version>3.8.1</apache.common.lang3.version>
+        <guava.version>27.0.1-jre</guava.version>
+        <fastjson.version>1.2.54</fastjson.version>
+        <javatuples.version>1.2</javatuples.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <micrometer.version>1.1.1</micrometer.version>
+    </properties>
+
+
+    <modules>
+        <module>common</module>
+        <module>server</module>
+        <module>client</module>
+        <module>transport</module>
+    </modules>
+
+
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- netty all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <!-- kafka clients -->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+
+            <!-- apache common lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.common.lang3.version}</version>
+            </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+
+
+            <!-- java tuples -->
+            <dependency>
+                <groupId>org.javatuples</groupId>
+                <artifactId>javatuples</artifactId>
+                <version>${javatuples.version}</version>
+            </dependency>
+
+            <!-- micrometer -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-jmx</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+
+
+            <!-- slf4j api -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- logback -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- mockito -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.verison}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <!-- resources plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                    <configuration>
+                        <encoding>${file.encoding}</encoding>
+                    </configuration>
+                </plugin>
+
+                <!-- java compiler plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${file.encoding}</encoding>
+                        <compilerArgs>
+                            <arg>-verbose</arg>
+                            <arg>-Xlint:all,-options,-path</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+
+                <!-- assembly plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven.assembly.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>assemble</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- checkstyle plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven.checkstyle.plugin.version}</version>
+                    <configuration>
+                        <configLocation>checkstyle/checkstyle.xml</configLocation>
+                        <encoding>${file.encoding}</encoding>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>validate</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- surefire plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
