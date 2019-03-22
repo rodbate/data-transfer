@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>data-transfer-all</artifactId>
-        <groupId>com.github.rodbate</groupId>
+        <groupId>com.github.rodbate.data-transfer</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,13 +15,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.rodbate</groupId>
+            <groupId>com.github.rodbate.data-transfer</groupId>
             <artifactId>data-transfer-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.github.rodbate</groupId>
+            <groupId>com.github.rodbate.data-transfer</groupId>
             <artifactId>data-transfer-transport</artifactId>
             <version>${project.version}</version>
         </dependency>
